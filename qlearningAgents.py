@@ -80,6 +80,9 @@ class QLearningAgent(ReinforcementAgent):
         maxVal = (None, -sys.maxint -1)
         for action in self.getLegalActions(state):
           qval = self.getQValue(state, action)
+          if qval is maxVal[1]:
+            if util.flipCoin(.5):
+              maxVal = (action, qval)
           if qval > maxVal[1]:
             maxVal = (action, qval)
         return maxVal[0]
